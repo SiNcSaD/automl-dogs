@@ -7,10 +7,19 @@ $('#input').change(function () {
         reader.readAsDataURL(this.files[0])
         reader.onload = function (e) {
             $('#cover').attr('src', reader.result)
+            $('#class_score').text('')
+            $('#class_name').text('')
         }
         file = this.files[0]
     }
 });
+
+function convert_chinese_name(eng_name) {
+    if (eng_name == 'akita')
+        return '秋田犬'
+    else
+        return '柴犬'
+}
 
 $('#submit').click(function (e) {
     if (file) {
@@ -28,8 +37,8 @@ $('#submit').click(function (e) {
             formData
         ).then(response => {
             // show result
-            $('#class_name').text(response.data.class_name)
-            $('#class_score').text(response.data.class_score)
+            $('#class_score').text((response.data.class_score * 100).toFixed(2) + '%')
+            $('#class_name').text('的機率是「' + convert_chinese_name(response.data.class_name) + '」')
 
             // disable button
             $(this).prop('disabled', false);
