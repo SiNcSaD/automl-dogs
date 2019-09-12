@@ -27,7 +27,7 @@ $('#submit').click(function (e) {
         $(this).prop('disabled', true);
         // add spinner to button
         $(this).html(
-            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> 預測中'
+            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> 預測中...'
         );
 
         const formData = new FormData()
